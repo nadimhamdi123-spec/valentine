@@ -18,6 +18,7 @@
       font-family: 'Comic Sans MS', cursive, sans-serif;
       overflow: hidden;
       padding: 15px;
+      position: relative;
     }
 
     .container {
@@ -29,6 +30,7 @@
       width: 100%;
       box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       z-index: 2;
+      position: relative;
     }
 
     h1, h2 { color: #ff4d6d; margin-bottom: 10px; }
@@ -55,6 +57,9 @@
       margin: 15px auto;
       line-height: 1.6;
       max-width: 280px;
+      position: relative;
+      min-height: 180px;
+      overflow: hidden;
     }
 
     .gift {
@@ -72,13 +77,37 @@
 
     .heart {
       position: absolute;
-      font-size: 26px;
-      animation: float 3s linear forwards;
+      pointer-events: none;
+      animation: float linear forwards, rotate linear forwards, shimmer 1s infinite alternate;
     }
 
     @keyframes float {
       from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-200px); opacity: 0; }
+      to { transform: translateY(-150px); opacity: 0; }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes shimmer {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+
+    /* Cœurs rebondissants pour le NON */
+    .mini-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 16px;
+      animation: bounce 1s ease-out forwards;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-40px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0; }
     }
   </style>
 </head>
@@ -110,7 +139,7 @@
 
     <!-- ÉCRAN 2 : MESSAGE -->
     <div id="love" class="hidden">
-      <div class="message">
+      <div class="message" id="messageDiv">
         Mon amour,<br>
         Chaque jour à tes côtés est une promesse douce.<br>
         Ton courage, ta lumière et la vie que tu portes
@@ -127,7 +156,7 @@
       <div class="gift">
         🎁 <strong>SURPRISE</strong><br>
         Un moment détente rien que pour toi ou pour nous, future maman 💆‍♀️
-        Je t'offre sois un SPA ou une séance photo maman+ventre+papa ou quelque chose que tu choisis <br>
+        Je t'offre soit un SPA ou une séance photo maman+ventre+papa ou ce que tu veux <br>
       </div>
     </div>
 
@@ -138,6 +167,7 @@
     const yesBtn = document.getElementById("yes");
     const intro = document.getElementById("intro");
     const love = document.getElementById("love");
+    const messageDiv = document.getElementById("messageDiv");
 
     const yesMusic = document.getElementById("yesMusic");
     const noSound = document.getElementById("noSound");
@@ -147,9 +177,21 @@
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
+
       // jouer le son "raté"
       noSound.currentTime = 0;
       noSound.play();
+
+      // créer des petits cœurs rebondissants
+      for (let i = 0; i < 3; i++) {
+        const miniHeart = document.createElement("div");
+        miniHeart.className = "mini-heart";
+        miniHeart.innerHTML = "💔";  // style drôle "raté"
+        miniHeart.style.left = (x + Math.random()*50) + "px";
+        miniHeart.style.top = (y + Math.random()*50) + "px";
+        document.body.appendChild(miniHeart);
+        setTimeout(() => miniHeart.remove(), 1000);
+      }
     }
 
     noBtn.addEventListener("mouseover", moveNo);
@@ -158,22 +200,28 @@
     yesBtn.addEventListener("click", () => {
       intro.classList.add("hidden");
       love.classList.remove("hidden");
-      launchHearts();
-      // jouer le son "love"
       yesMusic.currentTime = 0;
       yesMusic.play();
+      startHeartRain();
     });
 
-    function launchHearts() {
-      for (let i = 0; i < 25; i++) {
+    function startHeartRain() {
+      setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.bottom = "0px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 3000);
-      }
+
+        const size = 14 + Math.random() * 20;
+        heart.style.fontSize = size + "px";
+        heart.style.left = Math.random() * (messageDiv.offsetWidth - size) + "px";
+        heart.style.top = messageDiv.offsetHeight + "px";
+
+        const duration = 2 + Math.random() * 2; 
+        heart.style.animationDuration = duration + "s, " + (2 + Math.random() * 2) + "s, 0.5s";
+
+        messageDiv.appendChild(heart);
+        setTimeout(() => heart.remove(), duration * 1000);
+      }, 250);
     }
   </script>
 
