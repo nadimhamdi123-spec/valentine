@@ -6,6 +6,10 @@
   <title>Pour toi mon amour ❤️</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -15,20 +19,21 @@
       background: linear-gradient(135deg, #ff758c, #ff7eb3);
       font-family: 'Comic Sans MS', cursive, sans-serif;
       overflow: hidden;
+      padding: 15px;
     }
 
     .container {
       background: white;
-      padding: 25px;
-      border-radius: 25px;
+      padding: 20px;
+      border-radius: 24px;
       text-align: center;
-      max-width: 360px;
-      width: 90%;
+      max-width: 420px;
+      width: 100%;
       box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       z-index: 2;
     }
 
-    h1 {
+    h1, h2 {
       color: #ff4d6d;
       margin-bottom: 10px;
     }
@@ -36,26 +41,25 @@
     p {
       color: #555;
       font-size: 16px;
+      line-height: 1.5;
       margin-bottom: 15px;
     }
 
     img {
       width: 100%;
-      border-radius: 20px;
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 18px;
       margin-bottom: 15px;
     }
 
-    h2 {
-      color: #ff4d6d;
-    }
-
     button {
-      font-size: 18px;
-      padding: 14px 28px;
+      font-size: 17px;
+      padding: 14px 26px;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      margin: 10px;
+      margin: 8px;
     }
 
     #yes {
@@ -68,21 +72,25 @@
       position: absolute;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .message {
-      font-size: 20px;
+      font-size: 17px;
       color: #ff4d6d;
-      margin-top: 15px;
-      line-height: 1.4;
+      line-height: 1.6;
+      margin-top: 10px;
     }
 
     .gift {
-      margin-top: 15px;
+      margin-top: 18px;
       padding: 15px;
       border-radius: 15px;
       background: #fff0f5;
       border: 2px dashed #ff4d6d;
       color: #ff4d6d;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .gift span {
@@ -92,17 +100,17 @@
 
     .heart {
       position: absolute;
-      font-size: 28px;
+      font-size: 26px;
       animation: float 3s linear forwards;
     }
 
     @keyframes float {
-      0% {
+      from {
         transform: translateY(0);
         opacity: 1;
       }
-      100% {
-        transform: translateY(-180px);
+      to {
+        transform: translateY(-200px);
         opacity: 0;
       }
     }
@@ -112,30 +120,56 @@
 <body>
 
   <div class="container">
-    <h1>Mon amour ❤️</h1>
 
-    <p>
-      Ce n’est pas seulement la Saint-Valentin…  
-      C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨
-    </p>
+    <!-- ÉCRAN 1 : INTRO -->
+    <div id="intro">
+      <h1>Mon amour ❤️</h1>
 
-    <!-- IMAGE DU BÉBÉ -->
-    <img src="baby.jpg" alt="Notre bébé" />
+      <p>
+        Ce n’est pas seulement la Saint-Valentin…<br>
+        C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨
+      </p>
 
-    <h2>Veux-tu être ma Valentine ? 💕</h2>
+      <img src="baby.jpg" alt="Notre bébé" />
 
-    <button id="yes">OUI 💖</button>
-    <button id="no">NON 🙈</button>
+      <h2>Veux-tu être ma Valentine ? 💕</h2>
 
-    <div id="result"></div>
+      <button id="yes">OUI 💖</button>
+      <button id="no">NON 🙈</button>
+    </div>
+
+    <!-- ÉCRAN 2 : MESSAGE -->
+    <div id="love" class="hidden">
+      <div class="message">
+        Mon amour,<br><br>
+        Chaque jour à tes côtés est une promesse douce.<br>
+        Ton courage, ta lumière et la vie que tu portes<br>
+        font de toi la plus belle des merveilles ✨<br><br>
+        Je suis fier de toi, de nous,<br>
+        et de ce petit cœur qui grandit en toi 👶❤️<br><br>
+        Et parce que tout grand amour mérite d’être célébré…<br>
+        après le pilates 😌<br>
+        je t’emmène là où les plats sont aussi généreux que mon amour :<br>
+        <strong>au resto afghan 🇦🇫🔥</strong><br>
+        (oui oui… même si tu dis “juste une soupe” 😄)
+      </div>
+
+      <div class="gift">
+        🎁 <strong>SURPRISE</strong><br>
+        Un moment détente rien que pour toi, future maman 💆‍♀️<br><br>
+        Code cadeau SPA :<br>
+        <span>SPA-MAMAN-LOVE</span>
+      </div>
+    </div>
+
   </div>
 
   <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
-    const result = document.getElementById("result");
+    const intro = document.getElementById("intro");
+    const love = document.getElementById("love");
 
-    // Bouton NON qui fuit (PC + téléphone)
     function moveNo() {
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
@@ -146,25 +180,12 @@
     noBtn.addEventListener("mouseover", moveNo);
     noBtn.addEventListener("touchstart", moveNo);
 
-    // Bouton OUI
     yesBtn.addEventListener("click", () => {
-      result.innerHTML = `
-        <div class="message">
-          Je t’aime plus que tout ❤️<br>
-          Toi, moi, et notre bébé pour toujours 👶✨
-        </div>
-
-        <div class="gift">
-          🎁 <strong>SURPRISE</strong><br>
-          Un moment détente rien que pour toi, future maman 💆‍♀️<br><br>
-          Code cadeau SPA :<br>
-          <span>SPA-MAMAN-LOVE</span>
-        </div>
-      `;
+      intro.classList.add("hidden");
+      love.classList.remove("hidden");
       launchHearts();
     });
 
-    // Cœurs
     function launchHearts() {
       for (let i = 0; i < 25; i++) {
         const heart = document.createElement("div");
