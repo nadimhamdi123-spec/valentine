@@ -13,7 +13,7 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* container en haut */
+      align-items: flex-start;
       background: linear-gradient(135deg, #ff758c, #ff7eb3);
       font-family: 'Comic Sans MS', cursive, sans-serif;
       overflow: hidden;
@@ -44,6 +44,8 @@
       border-radius: 50px;
       cursor: pointer;
       margin: 8px;
+      position: relative;
+      z-index: 3;
     }
 
     #yes { background: #ff4d6d; color: white; }
@@ -109,17 +111,20 @@
       100% { transform: translateY(0) scale(1); opacity: 0; }
     }
 
-    /* Confettis cœur */
-    .confetti {
+    .big-heart {
       position: absolute;
+      font-size: 80px;
+      color: #ff4d6d;
+      opacity: 0.9;
+      animation: explode 0.6s ease-out forwards;
       pointer-events: none;
-      font-size: 20px;
-      animation: confettiFall 1.5s forwards;
+      z-index: 5;
     }
 
-    @keyframes confettiFall {
-      0% { transform: translate(0,0) rotate(0deg); opacity:1; }
-      100% { transform: translate(calc(-50px + 100px * var(--randX)), 150px) rotate(360deg); opacity:0; }
+    @keyframes explode {
+      0% { transform: scale(0.5); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
     }
   </style>
 </head>
@@ -190,9 +195,11 @@
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
 
+      // jouer le son "raté"
       noSound.currentTime = 0;
       noSound.play();
 
+      // mini cœurs
       for (let i = 0; i < 3; i++) {
         const miniHeart = document.createElement("div");
         miniHeart.className = "mini-heart";
@@ -202,6 +209,15 @@
         document.body.appendChild(miniHeart);
         setTimeout(() => miniHeart.remove(), 1000);
       }
+
+      // grand cœur explosion
+      const bigHeart = document.createElement("div");
+      bigHeart.className = "big-heart";
+      bigHeart.innerHTML = "❤️";
+      bigHeart.style.left = (x + noBtn.offsetWidth/2 - 40) + "px";
+      bigHeart.style.top = (y + noBtn.offsetHeight/2 - 40) + "px";
+      document.body.appendChild(bigHeart);
+      setTimeout(() => bigHeart.remove(), 600);
     }
 
     noBtn.addEventListener("mouseover", moveNo);
@@ -213,7 +229,6 @@
       yesMusic.currentTime = 0;
       yesMusic.play();
       startHeartRain();
-      launchConfetti();
     });
 
     function startHeartRain() {
@@ -234,20 +249,6 @@
         setTimeout(() => heart.remove(), duration * 1000);
       }, 250);
     }
-
-    function launchConfetti() {
-      for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.innerHTML = "💖";
-        confetti.style.left = "50%";
-        confetti.style.top = "50%";
-        confetti.style.setProperty('--randX', Math.random());
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500);
-      }
-    }
-
   </script>
 
 </body>
