@@ -27,7 +27,7 @@
       padding: 20px;
       border-radius: 24px;
       text-align: center;
-      max-width: 360px;  /* largeur réduite */
+      max-width: 360px;
       width: 100%;
       box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       z-index: 2;
@@ -76,12 +76,22 @@
       display: none;
     }
 
+    /* Écran message centré */
+    #love {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 3;
+    }
+
     .message {
       font-size: 17px;
       color: #ff4d6d;
       margin: 15px auto;
       line-height: 1.6;
-      max-width: 280px;   /* largeur réduite pour le message */
+      max-width: 280px;
     }
 
     .gift {
@@ -92,7 +102,7 @@
       border: 2px dashed #ff4d6d;
       color: #ff4d6d;
       font-size: 16px;
-      max-width: 280px;   /* largeur réduite pour le cadeau */
+      max-width: 280px;
     }
 
     .gift span {
@@ -121,49 +131,44 @@
 
 <body>
 
-  <div class="container">
+  <div class="container" id="intro">
+    <h1>Mon amour ❤️</h1>
 
-    <!-- ÉCRAN 1 : INTRO -->
-    <div id="intro">
-      <h1>Mon amour ❤️</h1>
+    <p>
+      Ce n’est pas seulement la Saint-Valentin…<br>
+      C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨
+    </p>
 
-      <p>
-        Ce n’est pas seulement la Saint-Valentin…<br>
-        C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨
-      </p>
+    <img src="baby.jpg" alt="Notre bébé" />
 
-      <img src="baby.jpg" alt="Notre bébé" />
+    <h2>Veux-tu être ma Valentine ? 💕</h2>
 
-      <h2>Veux-tu être ma Valentine ? 💕</h2>
+    <button id="yes">OUI 💖</button>
+    <button id="no">NON 🙈</button>
+  </div>
 
-      <button id="yes">OUI 💖</button>
-      <button id="no">NON 🙈</button>
+  <!-- Écran 2 : MESSAGE au centre de l'écran -->
+  <div id="love" class="hidden">
+    <div class="message">
+      Mon amour,<br><br>
+      Chaque jour à tes côtés est une promesse douce.<br>
+      Ton courage, ta lumière et la vie que tu portes<br>
+      font de toi la plus belle des merveilles ✨<br><br>
+      Je suis fier de toi, de nous,<br>
+      et de ce petit cœur qui grandit en toi 👶❤️<br><br>
+      Et parce que tout grand amour mérite d’être célébré…<br>
+      après le pilates 😌<br>
+      je t’emmène là où les plats sont aussi généreux que mon amour :<br>
+      <strong>au resto afghan 🇦🇫🔥</strong><br>
+      (oui oui… même si tu dis “juste une soupe” 😄)
     </div>
 
-    <!-- ÉCRAN 2 : MESSAGE -->
-    <div id="love" class="hidden">
-      <div class="message">
-        Mon amour,<br><br>
-        Chaque jour à tes côtés est une promesse douce.<br>
-        Ton courage, ta lumière et la vie que tu portes<br>
-        font de toi la plus belle des merveilles ✨<br><br>
-        Je suis fier de toi, de nous,<br>
-        et de ce petit cœur qui grandit en toi 👶❤️<br><br>
-        Et parce que tout grand amour mérite d’être célébré…<br>
-        après le pilates 😌<br>
-        je t’emmène là où les plats sont aussi généreux que mon amour :<br>
-        <strong>au resto afghan 🇦🇫🔥</strong><br>
-        (oui oui… même si tu dis “juste une soupe” 😄)
-      </div>
-
-      <div class="gift">
-        🎁 <strong>SURPRISE</strong><br>
-        Un moment détente rien que pour toi, future maman 💆‍♀️<br><br>
-        Code cadeau SPA :<br>
-        <span>SPA-MAMAN-LOVE</span>
-      </div>
+    <div class="gift">
+      🎁 <strong>SURPRISE</strong><br>
+      Un moment détente rien que pour toi, future maman 💆‍♀️<br><br>
+      Code cadeau SPA :<br>
+      <span>SPA-MAMAN-LOVE</span>
     </div>
-
   </div>
 
   <script>
