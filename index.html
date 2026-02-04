@@ -1,255 +1,197 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pour toi mon amour ❤️</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pour toi mon amour ❤️</title>
 
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      overflow: hidden;
-      padding: 15px;
-      position: relative;
-    }
-
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 24px;
-      text-align: center;
-      max-width: 360px;
-      width: 100%;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      z-index: 2;
-      position: relative;
-    }
-
-    h1, h2 { color: #ff4d6d; margin-bottom: 10px; }
-    p { color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 15px; }
-    img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 18px; margin-bottom: 15px; }
-
-    button {
-      font-size: 17px;
-      padding: 14px 26px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      margin: 8px;
-      position: relative;
-      z-index: 3;
-    }
-
-    #yes { background: #ff4d6d; color: white; }
-    #no { background: #ddd; position: absolute; }
-
-    .hidden { display: none; }
-
-    .message {
-      font-size: 17px;
-      color: #ff4d6d;
-      margin: 15px auto;
-      line-height: 1.6;
-      max-width: 280px;
-      position: relative;
-      min-height: 180px;
-      overflow: hidden;
-    }
-
-    .gift {
-      margin: 18px auto;
-      padding: 15px;
-      border-radius: 15px;
-      background: #fff0f5;
-      border: 2px dashed #ff4d6d;
-      color: #ff4d6d;
-      font-size: 16px;
-      max-width: 280px;
-    }
-
-    .gift span { font-size: 22px; font-weight: bold; }
-
-    .heart {
-      position: absolute;
-      pointer-events: none;
-      animation: float linear forwards, rotate linear forwards, shimmer 1s infinite alternate;
-    }
-
-    @keyframes float {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-150px); opacity: 0; }
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes shimmer {
-      from { opacity: 0.7; }
-      to { opacity: 1; }
-    }
-
-    .mini-heart {
-      position: absolute;
-      pointer-events: none;
-      font-size: 16px;
-      animation: bounce 1s ease-out forwards;
-    }
-
-    @keyframes bounce {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      50% { transform: translateY(-40px) scale(1.2); opacity: 1; }
-      100% { transform: translateY(0) scale(1); opacity: 0; }
-    }
-
-    .big-heart {
-      position: absolute;
-      font-size: 80px;
-      color: #ff4d6d;
-      opacity: 0.9;
-      animation: explode 0.6s ease-out forwards;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0.5); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 1; }
-      100% { transform: scale(2.5); opacity: 0; }
-    }
-  </style>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    overflow: hidden;
+    padding: 15px;
+    position: relative;
+  }
+  .container {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    z-index: 2;
+    position: relative;
+  }
+  h1,h2{color:#ff4d6d;margin-bottom:10px;}
+  p{color:#555;font-size:16px;line-height:1.5;margin-bottom:15px;}
+  img{width:100%;max-height:260px;object-fit:cover;border-radius:18px;margin-bottom:15px;}
+  button{
+    font-size:17px;
+    padding:14px 26px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    margin:8px;
+    position:relative;
+    z-index:3;
+  }
+  #yes{background:#ff4d6d;color:white;}
+  #no{background:#ddd;position:absolute;}
+  .hidden{display:none;}
+  .message{
+    font-size:17px;color:#ff4d6d;margin:15px auto;line-height:1.6;
+    max-width:280px;position:relative;min-height:180px;overflow:hidden;
+  }
+  .gift{
+    margin:18px auto;
+    padding:15px;
+    border-radius:15px;
+    background:#fff0f5;
+    border:2px dashed #ff4d6d;
+    color:#ff4d6d;
+    font-size:16px;
+    max-width:280px;
+  }
+  .gift span{font-size:22px;font-weight:bold;}
+  .heart{position:absolute;pointer-events:none;animation:float linear forwards,rotate linear forwards,shimmer 1s infinite alternate;}
+  @keyframes float{from{transform:translateY(0);opacity:1;}to{transform:translateY(-150px);opacity:0;}}
+  @keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  @keyframes shimmer{from{opacity:0.7;}to{opacity:1;}}
+  .mini-heart{position:absolute;pointer-events:none;font-size:16px;animation:bounce 1s ease-out forwards;}
+  @keyframes bounce{0%{transform:translateY(0) scale(1);opacity:1;}50%{transform:translateY(-40px) scale(1.2);opacity:1;}100%{transform:translateY(0) scale(1);opacity:0;}}
+  .big-heart{position:absolute;font-size:80px;color:#ff4d6d;opacity:0.9;pointer-events:none;z-index:5;}
+</style>
 </head>
-
 <body>
 
-  <!-- Sons -->
-  <audio id="yesMusic" src="love.mp3"></audio>
-  <audio id="noSound" src="fail.mp3"></audio>
+<!-- Sons -->
+<audio id="yesMusic" src="love.mp3"></audio>
+<audio id="noSound" src="fail.mp3"></audio>
 
-  <div class="container">
+<div class="container">
 
-    <!-- ÉCRAN 1 : INTRO -->
-    <div id="intro">
-      <h1>Mon amour ❤️</h1>
-
-      <p>
-        Ce n’est pas seulement la Saint-Valentin…<br>
-        C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨
-      </p>
-
-      <img src="baby.jpg" alt="Notre bébé" />
-
-      <h2>Veux-tu être ma Valentine ? 💕 (essaye de clicker sur non)</h2>
-
-      <button id="yes">OUI 💖</button>
-      <button id="no">NON 🙈</button>
-    </div>
-
-    <!-- ÉCRAN 2 : MESSAGE -->
-    <div id="love" class="hidden">
-      <div class="message" id="messageDiv">
-        Mon amour,<br>
-        Chaque jour à tes côtés est une promesse douce.<br>
-        Ton courage, ta lumière et la vie que tu portes
-        font de toi la plus belle des merveilles ✨<br>
-        Je suis fier de toi, de nous,
-        et de ce petit cœur qui grandit en toi 👶❤️<br>
-        Et parce que tout grand amour mérite d’être célébré…
-        après le pilates à 20h30 😌<br>
-        je t’emmène là où les plats sont aussi généreux que mon amour :
-        <strong>au resto afghan 🇦🇫🔥</strong><br>
-        (oui oui… même si tu dis “juste une soupe” 😄)
-      </div>
-
-      <div class="gift">
-        🎁 <strong>SURPRISE</strong><br>
-        Un moment détente rien que pour toi ou pour nous, future maman 💆‍♀️
-        Je t'offre soit un SPA ou une séance photo maman+ventre+papa ou ce que tu veux <br>
-      </div>
-    </div>
-
+  <div id="intro">
+    <h1>Mon amour ❤️</h1>
+    <p>Ce n’est pas seulement la Saint-Valentin…<br>C’est aussi le <strong>7ᵉ mois</strong> de notre petit miracle 👶✨</p>
+    <img src="baby.jpg" alt="Notre bébé" />
+    <h2>Veux-tu être ma Valentine ? 💕 (essaye de clicker sur non)</h2>
+    <button id="yes">OUI 💖</button>
+    <button id="no">NON 🙈</button>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const intro = document.getElementById("intro");
-    const love = document.getElementById("love");
-    const messageDiv = document.getElementById("messageDiv");
+  <div id="love" class="hidden">
+    <div class="message" id="messageDiv">
+      Mon amour,<br>
+      Chaque jour à tes côtés est une promesse douce.<br>
+      Ton courage, ta lumière et la vie que tu portes
+      font de toi la plus belle des merveilles ✨<br>
+      Je suis fier de toi, de nous,
+      et de ce petit cœur qui grandit en toi 👶❤️<br>
+      Et parce que tout grand amour mérite d’être célébré…
+      après le pilates à 20h30 😌<br>
+      je t’emmène là où les plats sont aussi généreux que mon amour :
+      <strong>au resto afghan 🇦🇫🔥</strong><br>
+      (oui oui… même si tu dis “juste une soupe” 😄)
+    </div>
+    <div class="gift">
+      🎁 <strong>SURPRISE</strong><br>
+      Un moment détente rien que pour toi ou pour nous, future maman 💆‍♀️
+      Je t'offre soit un SPA ou une séance photo maman+ventre+papa ou ce que tu veux <br>
+    </div>
+  </div>
+</div>
 
-    const yesMusic = document.getElementById("yesMusic");
-    const noSound = document.getElementById("noSound");
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const intro = document.getElementById("intro");
+const love = document.getElementById("love");
+const messageDiv = document.getElementById("messageDiv");
+const yesMusic = document.getElementById("yesMusic");
+const noSound = document.getElementById("noSound");
 
-    function moveNo() {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+// Fonction explosion de cœurs
+function explodeHearts(x, y) {
+  for (let i = 0; i < 15; i++) {
+    const heart = document.createElement("div");
+    heart.className = "big-heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
 
-      // jouer le son "raté"
-      noSound.currentTime = 0;
-      noSound.play();
+    const angle = Math.random()*2*Math.PI;
+    const distance = 30 + Math.random()*60;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
 
-      // mini cœurs
-      for (let i = 0; i < 3; i++) {
-        const miniHeart = document.createElement("div");
-        miniHeart.className = "mini-heart";
-        miniHeart.innerHTML = "💔";
-        miniHeart.style.left = (x + Math.random()*50) + "px";
-        miniHeart.style.top = (y + Math.random()*50) + "px";
-        document.body.appendChild(miniHeart);
-        setTimeout(() => miniHeart.remove(), 1000);
-      }
+    heart.animate([
+      { transform: "translate(0,0) scale(1)", opacity:1 },
+      { transform: `translate(${dx}px, ${dy}px) scale(1.5)`, opacity:0 }
+    ], { duration: 800, easing: "ease-out" });
 
-      // grand cœur explosion
-      const bigHeart = document.createElement("div");
-      bigHeart.className = "big-heart";
-      bigHeart.innerHTML = "❤️";
-      bigHeart.style.left = (x + noBtn.offsetWidth/2 - 40) + "px";
-      bigHeart.style.top = (y + noBtn.offsetHeight/2 - 40) + "px";
-      document.body.appendChild(bigHeart);
-      setTimeout(() => bigHeart.remove(), 600);
-    }
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),800);
+  }
+}
 
-    noBtn.addEventListener("mouseover", moveNo);
-    noBtn.addEventListener("touchstart", moveNo);
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 
-    yesBtn.addEventListener("click", () => {
-      intro.classList.add("hidden");
-      love.classList.remove("hidden");
-      yesMusic.currentTime = 0;
-      yesMusic.play();
-      startHeartRain();
-    });
+  noSound.currentTime = 0;
+  noSound.play();
 
-    function startHeartRain() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
+  // mini cœurs
+  for (let i = 0; i < 3; i++) {
+    const miniHeart = document.createElement("div");
+    miniHeart.className = "mini-heart";
+    miniHeart.innerHTML = "💔";
+    miniHeart.style.left = (x + Math.random()*50) + "px";
+    miniHeart.style.top = (y + Math.random()*50) + "px";
+    document.body.appendChild(miniHeart);
+    setTimeout(() => miniHeart.remove(), 1000);
+  }
 
-        const size = 14 + Math.random() * 20;
-        heart.style.fontSize = size + "px";
-        heart.style.left = Math.random() * (messageDiv.offsetWidth - size) + "px";
-        heart.style.top = messageDiv.offsetHeight + "px";
+  // explosion
+  explodeHearts(x + noBtn.offsetWidth/2 - 20, y + noBtn.offsetHeight/2 - 20);
+}
 
-        const duration = 2 + Math.random() * 2; 
-        heart.style.animationDuration = duration + "s, " + (2 + Math.random() * 2) + "s, 0.5s";
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-        messageDiv.appendChild(heart);
-        setTimeout(() => heart.remove(), duration * 1000);
-      }, 250);
-    }
-  </script>
+yesBtn.addEventListener("click", () => {
+  intro.classList.add("hidden");
+  love.classList.remove("hidden");
+  yesMusic.currentTime = 0;
+  yesMusic.play();
+  startHeartRain();
+});
 
+function startHeartRain() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    const size = 14 + Math.random() * 20;
+    heart.style.fontSize = size + "px";
+    heart.style.left = Math.random() * (messageDiv.offsetWidth - size) + "px";
+    heart.style.top = messageDiv.offsetHeight + "px";
+    const duration = 2 + Math.random() * 2; 
+    heart.style.animationDuration = duration + "s, " + (2 + Math.random() * 2) + "s, 0.5s";
+    messageDiv.appendChild(heart);
+    setTimeout(() => heart.remove(), duration*1000);
+  }, 250);
+}
+</script>
 </body>
 </html>
